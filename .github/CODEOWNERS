@@ -1,0 +1,6 @@
+# Replace with real GitHub usernames before enabling branch protection
+* @your-github-team
+/services/api/ @api-maintainers
+/services/reports/ @reporting-maintainers
+/apps/web/ @frontend-maintainers
+/database/ @database-maintainers

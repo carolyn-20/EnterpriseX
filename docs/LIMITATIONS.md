@@ -1,0 +1,13 @@
+# Known limitations and safe demo assumptions
+- Educational prototype; synthetic records only. Not production accounting or ERP compliance software.
+- Authentication uses a seeded demo account and JWT; password reset, refresh/revocation, MFA, organization scopes, and full role administration are not implemented.
+- The seeded account hash is for the demo credentials in README; if login fails after local changes, reset/seed the user using a proper bcrypt hash. (Seed hash may require adjustment for environment.)
+- Approval flow is simple; purchase orders have no multi-level approval thresholds.
+- Receipt workflow currently receives all PO line quantities; partial receipts/returns are not supported.
+- Sales order item pricing uses product current price; order edit/cancel and customer master data are not implemented.
+- Invoicing/payment has no currency, tax, credit note, reconciliation, or gateway integration.
+- Accounting journals are schema-only; enforce double-entry balancing before real use.
+- Redis is provisioned but no queue worker/cache client is connected.
+- External email, document storage, supplier APIs, imports/exports are mock/future work.
+- No browser E2E suite, load test, security scan, production backup/restore automation, cloud deployment, or monitoring stack is configured.
+- Basic tests validate calculations and service shape; they do not replace integration tests against PostgreSQL.
