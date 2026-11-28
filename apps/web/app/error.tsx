@@ -1,0 +1,6 @@
+'use client';
+import {useEffect} from 'react';
+export default function Error({error,reset}:{error:Error&{digest?:string},reset:()=>void}){
+ useEffect(()=>{console.error('EnterpriseX page error:',error)},[error]);
+ return <main style={{minHeight:'100vh',display:'grid',placeItems:'center',background:'#f4f7fb',fontFamily:'Arial,sans-serif',padding:24}}><section style={{maxWidth:520,background:'#fff',padding:32,borderRadius:16,boxShadow:'0 10px 40px #0001'}}><h1 style={{color:'#14294b'}}>EnterpriseX</h1><h2>Page error</h2><p>The page encountered an error while loading. Your account data is not deleted.</p><p style={{color:'#667085',fontSize:13,wordBreak:'break-word'}}>{error?.message||'Unexpected rendering error'}</p><button onClick={()=>reset()} style={{padding:'12px 18px',border:0,borderRadius:8,background:'#2458d3',color:'#fff',cursor:'pointer'}}>Try again</button><button onClick={()=>{localStorage.removeItem('enterprisex_token');localStorage.removeItem('enterprisex_user');location.href='/'}} style={{marginLeft:8,padding:'12px 18px',border:'1px solid #ccd4e0',borderRadius:8,background:'#fff',cursor:'pointer'}}>Reset login</button></section></main>
+}
