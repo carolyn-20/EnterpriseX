@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS enterprisex;
+SET search_path TO enterprisex, public;
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE TABLE IF NOT EXISTS users(id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, role TEXT NOT NULL DEFAULT 'sales', created_at TIMESTAMPTZ DEFAULT now());
 CREATE TABLE IF NOT EXISTS vendors(id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name TEXT NOT NULL, email TEXT, phone TEXT, tax_id TEXT, status TEXT NOT NULL DEFAULT 'active', created_at TIMESTAMPTZ DEFAULT now());
