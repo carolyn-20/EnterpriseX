@@ -1,7 +1,8 @@
 FROM node:20-alpine
 WORKDIR /app
-COPY package*.json ./
+COPY services/api/package*.json ./
 RUN npm install --omit=dev
-COPY src ./src
+COPY services/api/src ./src
+COPY database/init.sql ./database/init.sql
 EXPOSE 4000
-CMD ["node","src/server.js"]
+CMD ["sh","-c","node src/init-db.js && node src/server.js"]

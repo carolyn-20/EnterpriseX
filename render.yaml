@@ -1,0 +1,50 @@
+databases:
+  - name: enterprisex-db
+    databaseName: enterprisex
+    user: enterprisex
+    plan: free
+    region: singapore
+
+services:
+  - type: web
+    name: enterprisex-api
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./services/api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: enterprisex-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+
+  - type: web
+    name: enterprisex-reports
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./services/reports/Dockerfile
+    dockerContext: ./services/reports
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: enterprisex-db
+          property: connectionString
+
+  - type: web
+    name: enterprisex-web
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./apps/web/Dockerfile
+    dockerContext: ./apps/web
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://enterprisex-api.onrender.com
+      - key: NEXT_PUBLIC_REPORTS_URL
+        value: https://enterprisex-reports.onrender.com

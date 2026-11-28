@@ -23,7 +23,9 @@ services:
       retries: 10
     networks: [erp]
   api:
-    build: ./services/api
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER:-erp_user}:${POSTGRES_PASSWORD:-local_demo_password_change_me}@db:5432/${POSTGRES_DB:-enterprisex}
       JWT_SECRET: ${JWT_SECRET:-local_only_replace_with_a_long_random_secret}
