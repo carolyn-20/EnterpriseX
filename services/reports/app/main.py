@@ -6,7 +6,7 @@ app=FastAPI(title='EnterpriseX Reporting Service',version='1.0.0',description='E
 DB=os.getenv('DATABASE_URL','postgres://erp_user:local_demo_password_change_me@localhost:5432/enterprisex')
 def fetch(sql,params=()):
  try:
-  with psycopg.connect(DB,row_factory=dict_row) as conn:
+  with psycopg.connect(DB,row_factory=dict_row,options='-c search_path=enterprisex,public') as conn:
    with conn.cursor() as cur: cur.execute(sql,params); return cur.fetchall()
  except Exception as exc: raise HTTPException(status_code=503,detail='Report database unavailable') from exc
 @app.get('/health')
