@@ -6,9 +6,10 @@ async function initializeDatabase() {
   const client = new Client({ connectionString: process.env.DATABASE_URL, options: '-c search_path=enterprisex,public' });
   try {
     await client.connect();
-    const schema = fs.readFileSync(path.join(__dirname, '../../database/init.sql'), 'utf8');
+    await client.query('CREATE SCHEMA IF NOT EXISTS enterprisex');
+    const schema = fs.readFileSync(path.join(__dirname, '../database/init.sql'), 'utf8');
     await client.query(schema);
-    console.log('EnterpriseX database schema and demo data initialized.');
+    console.log('EnterpriseX database schema and demo data initialized in isolated schema enterprisex.');
   } finally {
     await client.end();
   }
