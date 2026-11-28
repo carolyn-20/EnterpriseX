@@ -1,8 +1,8 @@
 'use client';
 import type { ReactNode } from 'react';
 import {useEffect,useMemo,useState} from 'react';
-const API=process.env.NEXT_PUBLIC_API_URL||'http://localhost:4000';
-const REPORTS_URL=process.env.NEXT_PUBLIC_REPORTS_URL||'http://localhost:8000';
+const API=process.env.NEXT_PUBLIC_API_URL||'https://enterprisex-api-trn3.onrender.com';
+const REPORTS_URL=process.env.NEXT_PUBLIC_REPORTS_URL||'https://enterprisex-reports-trn3.onrender.com';
 const pages=['Dashboard','Products','Vendors','Procurement','Inventory','Sales','Invoices','Payments','Approvals','Finance','Reports','Audit Trail'];
 function fmt(v:any){return Number(v||0).toLocaleString('en-IN',{maximumFractionDigits:2})}
 export default function Home(){const [token,setToken]=useState('');const [user,setUser]=useState<any>(null);const [page,setPage]=useState('Dashboard');const [data,setData]=useState<any>({});const [aux,setAux]=useState<any>({products:[],vendors:[]});const [error,setError]=useState('');const [loading,setLoading]=useState(false);
